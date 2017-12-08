@@ -3,9 +3,6 @@
 namespace DevGroup\Dreamkas;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Middleware;
-use GuzzleHttp\Psr7\Request;
-
 
 /**
  * Class Api
@@ -23,7 +20,7 @@ class Api
     /** @var Client */
     protected $client;
 
-    protected $baseUri = [
+    protected static $baseUri = [
         self::MODE_PRODUCTION => 'https://kabinet.dreamkas.ru/api/',
         self::MODE_MOCK => 'https://private-anon-2a1e26f7f7-kabinet.apiary-mock.com/api/',
         self::MODE_DEBUG => 'https://private-anon-2a1e26f7f7-kabinet.apiary-proxy.com/api/',
@@ -43,9 +40,9 @@ class Api
         $this->createClient();
     }
 
-    protected function createClient()
+    protected function createClient(): void
     {
-        $baseUri = $this->baseUri[$this->mode] ?? null;
+        $baseUri = static::$baseUri[$this->mode] ?? null;
         if ($baseUri === null) {
             throw new \RuntimeException('Unknown Dreamkas Api mode');
         }

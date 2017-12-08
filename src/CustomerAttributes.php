@@ -5,6 +5,9 @@ namespace DevGroup\Dreamkas;
 
 use DevGroup\Dreamkas\exceptions\ValidationException;
 
+/**
+ * Class CustomerAttributes описывает информацию о покупателе, куда ему высылать чек
+ */
 class CustomerAttributes extends Configurable
 {
     /** @var string|null */

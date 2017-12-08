@@ -30,10 +30,10 @@ class Configurable
             if ($value === null) {
                 continue;
             }
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $newValue = [];
                 foreach ($value as $valueKey => $valueItem) {
-                    if ($valueItem instanceof Configurable) {
+                    if ($valueItem instanceof self) {
                         $newValue[$valueKey] = $valueItem->toArray();
                     } else {
                         $newValue[$valueKey] = $valueItem;
@@ -41,7 +41,7 @@ class Configurable
                 }
                 $value = $newValue;
             }
-            if ($value instanceof Configurable) {
+            if ($value instanceof self) {
                 $value = $value->toArray();
             }
             $result[$key] = $value;
