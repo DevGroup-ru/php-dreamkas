@@ -9,7 +9,7 @@ namespace DevGroup\Dreamkas;
 class PaymentType
 {
     // нал
-    public const TYPE_CASH = 'CASH';
+    const TYPE_CASH = 'CASH';
     // безнал
-    public const TYPE_CASHLESS = 'CASHLESS';
+    const TYPE_CASHLESS = 'CASHLESS';
 }

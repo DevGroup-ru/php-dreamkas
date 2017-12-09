@@ -9,10 +9,10 @@ use DevGroup\Dreamkas\exceptions\ValidationException;
  */
 class Receipt extends Configurable
 {
-    public const TYPE_SALE = 'SALE';
-    public const TYPE_REFUND = 'REFUND';
-    public const TYPE_OUTFLOW = 'OUTFLOW';
-    public const TYPE_OUTFLOW_REFUND = 'OUTFLOW_REFUND';
+    const TYPE_SALE = 'SALE';
+    const TYPE_REFUND = 'REFUND';
+    const TYPE_OUTFLOW = 'OUTFLOW';
+    const TYPE_OUTFLOW_REFUND = 'OUTFLOW_REFUND';
 
     // Тип чека
     public $type = self::TYPE_SALE;

@@ -9,8 +9,8 @@ use DevGroup\Dreamkas\exceptions\ValidationException;
  */
 class Position extends Configurable
 {
-    public const TYPE_COUNTABLE = 'COUNTABLE';
-    public const TYPE_SCALABLE = 'SCALABLE';
+    const TYPE_COUNTABLE = 'COUNTABLE';
+    const TYPE_SCALABLE = 'SCALABLE';
 
     public $name = '';
 

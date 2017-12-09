@@ -9,15 +9,15 @@ namespace DevGroup\Dreamkas;
 class TaxMode
 {
     // ОСНО
-    public const MODE_DEFAULT = 'DEFAULT';
+    const MODE_DEFAULT = 'DEFAULT';
     // УСН доход
-    public const MODE_SIMPLE = 'SIMPLE';
+    const MODE_SIMPLE = 'SIMPLE';
     // УСН Доход-расход
-    public const MODE_SIMPLE_WO = 'SIMPLE_WO';
+    const MODE_SIMPLE_WO = 'SIMPLE_WO';
     // ЕНВД
-    public const MODE_ENVD = 'ENVD';
+    const MODE_ENVD = 'ENVD';
     // ЕСХН
-    public const MODE_AGRICULT = 'AGRICULT';
+    const MODE_AGRICULT = 'AGRICULT';
     // Патент
-    public const MODE_PATENT = 'PATENT';
+    const MODE_PATENT = 'PATENT';
 }

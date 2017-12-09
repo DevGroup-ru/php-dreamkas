@@ -9,9 +9,9 @@ use GuzzleHttp\Client;
  */
 class Api
 {
-    public const MODE_PRODUCTION = 0;
-    public const MODE_MOCK = 1;
-    public const MODE_DEBUG = 2;
+    const MODE_PRODUCTION = 0;
+    const MODE_MOCK = 1;
+    const MODE_DEBUG = 2;
 
     public $accessToken = '';
     public $deviceId = 0;
@@ -40,7 +40,7 @@ class Api
         $this->createClient();
     }
 
-    protected function createClient(): void
+    protected function createClient()
     {
         $baseUri = static::$baseUri[$this->mode] ?? null;
         if ($baseUri === null) {
