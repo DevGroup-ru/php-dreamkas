@@ -43,7 +43,10 @@ $receipt->attributes = new CustomerAttributes([
     'phone' => '74996776566', // телефон покупателя
 ]);
 
-$receipt->calculateSum();
+// Можно посчитать сумму автоматом
+// $receipt->calculateSum();
+// А можно завалидировать чек
+// $receipt->validate();
 
 
 $response = [];
