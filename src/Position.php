@@ -35,7 +35,7 @@ class Position extends Configurable
      * @return bool
      * @throws ValidationException
      */
-    public function validate(): bool
+    public function validate()
     {
         if (empty($this->name)) {
             throw new ValidationException('Name is not specified');

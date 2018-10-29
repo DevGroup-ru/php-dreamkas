@@ -9,7 +9,7 @@ use DevGroup\Dreamkas\Payment;
 use DevGroup\Dreamkas\Position;
 use DevGroup\Dreamkas\Receipt;
 use DevGroup\Dreamkas\TaxMode;
-use GuzzleHttp\Exception\ClientException;
+use Guzzle\Http\Exception\RequestException;
 
 
 /**
@@ -23,7 +23,7 @@ class ApiTest extends \PHPUnit_Framework_TestCase
         $api = new Api('FAKE', 123, Api::MODE_MOCK);
         $result = $api->json('GET', 'products');
 
-        $this->assertSame([[]], $result);
+        $this->assertSame('b0381fe4-4428-4dcb-8169-c8bbcab59626', $result[0]['id']);
     }
 
     public function testPostReceipt()
@@ -33,28 +33,30 @@ class ApiTest extends \PHPUnit_Framework_TestCase
 
         $receipt = new Receipt();
         $receipt->taxMode = TaxMode::MODE_SIMPLE;
-        $receipt->positions[] = new Position([
+        $receipt->positions[] = new Position(array(
             'name' => 'Билет - тест',
             'quantity' => 2,
             'price' => 210000,
-        ]);
-        $receipt->payments[] = new Payment([
+        ));
+        $receipt->payments[] = new Payment(array(
             'sum' => 420000,
-        ]);
-        $receipt->attributes = new CustomerAttributes([
+        ));
+        $receipt->attributes = new CustomerAttributes(array(
             'email' => 'info@devgroup.ru',
-        ]);
+        ));
 
         $receipt->calculateSum();
 
+        $this->assertSame(420000, $receipt->total['priceSum']);
 
-        $response = [];
+
+        $response = array();
         try {
             $response = $api->postReceipt($receipt);
         } catch (ValidationException $e) {
             $this->assertFalse(true, 'Validation exception: ' . $e->getMessage());
-        } catch (ClientException $e) {
-            echo $e->getResponse()->getBody();
+        } catch (RequestException $e) {
+
             $this->assertFalse(true, 'Client exception');
         }
         $this->assertArrayHasKey('status', $response);
@@ -63,13 +65,12 @@ class ApiTest extends \PHPUnit_Framework_TestCase
 
 //
         $receipt->type = Receipt::TYPE_REFUND;
-        $response = [];
+        $response = array();
         try {
             $response = $api->postReceipt($receipt);
         } catch (ValidationException $e) {
             $this->assertFalse(true, 'Validation exception: ' . $e->getMessage());
-        } catch (ClientException $e) {
-            echo $e->getResponse()->getBody();
+        } catch (RequestException $e) {
             $this->assertFalse(true, 'Client exception');
         }
         $this->assertArrayHasKey('status', $response);

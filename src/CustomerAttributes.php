@@ -19,7 +19,7 @@ class CustomerAttributes extends Configurable
      * @return bool
      * @throws ValidationException
      */
-    public function validate(): bool
+    public function validate()
     {
         if (empty($this->email) && empty($this->phone)) {
             throw new ValidationException('No customer details provided');

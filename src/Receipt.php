@@ -23,24 +23,24 @@ class Receipt extends Configurable
     public $taxMode;
 
     /** @var Position[] */
-    public $positions = [];
+    public $positions = array();
 
     /** @var Payment[] */
-    public $payments = [];
+    public $payments = array();
 
     /** @var CustomerAttributes|array */
-    public $attributes = [];
+    public $attributes = array();
 
     // Общая сумма чека
-    public $total = [
+    public $total = array(
         'priceSum' => 0,
-    ];
+    );
 
 
     /**
      * @return array
      */
-    public function toArray(): array
+    public function toArray()
     {
         $this->calculateSum();
         return parent::toArray();
@@ -57,14 +57,14 @@ class Receipt extends Configurable
             $sum += $position->priceSum;
         }
 
-        $this->total = ['priceSum' => $sum];
+        $this->total = array('priceSum' => $sum);
     }
 
     /**
      * @return bool
      * @throws ValidationException
      */
-    public function validate(): bool
+    public function validate()
     {
         if (\count($this->payments) === 0) {
             throw new ValidationException('No payments specified');

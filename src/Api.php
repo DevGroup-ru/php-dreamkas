@@ -2,7 +2,8 @@
 
 namespace DevGroup\Dreamkas;
 
-use GuzzleHttp\Client;
+
+use Guzzle\Http\Client;
 
 /**
  * Class Api
@@ -20,11 +21,12 @@ class Api
     /** @var Client */
     protected $client;
 
-    protected static $baseUri = [
+
+    protected static $baseUri = array(
         self::MODE_PRODUCTION => 'https://kabinet.dreamkas.ru/api/',
-        self::MODE_MOCK => 'https://private-anon-2a1e26f7f7-kabinet.apiary-mock.com/api/',
+        self::MODE_MOCK => 'http://private-anon-7a5585a78f-kabinet.apiary-mock.com/api/',
         self::MODE_DEBUG => 'https://private-anon-2a1e26f7f7-kabinet.apiary-proxy.com/api/',
-    ];
+    );
 
     /**
      * Api constructor.
@@ -32,7 +34,7 @@ class Api
      * @param int $deviceId
      * @param int $mode
      */
-    public function __construct(string $accessToken, int $deviceId, int $mode = self::MODE_PRODUCTION)
+    public function __construct($accessToken, $deviceId, $mode = self::MODE_PRODUCTION)
     {
         $this->accessToken = $accessToken;
         $this->deviceId = $deviceId;
@@ -42,14 +44,12 @@ class Api
 
     protected function createClient()
     {
-        $baseUri = static::$baseUri[$this->mode] ?? null;
+        $baseUri = isset(static::$baseUri[$this->mode]) ? static::$baseUri[$this->mode] : null;
         if ($baseUri === null) {
             throw new \RuntimeException('Unknown Dreamkas Api mode');
         }
 
-        $this->client = new Client([
-            'base_uri' => $baseUri,
-        ]);
+        $this->client = new Client($baseUri);
 
 
     }
@@ -57,30 +57,28 @@ class Api
     /**
      * @param string $method
      * @param string $uri
-     * @param array $options
-     * @return mixed|\Psr\Http\Message\ResponseInterface
+     * @param array $headers
+     * @param null $json
+     * @return \Guzzle\Http\Message\Response
      */
-    public function request(string $method, string $uri = '', array $options = [])
+    public function request($method, $uri = '', $headers = array(), $json = null)
     {
-        if (isset($options['headers']) === false) {
-            $options['headers'] = [];
-        }
-        $options['headers']['Authorization'] = 'Bearer ' . $this->accessToken;
-        $options['headers']['Accept'] = 'application/json';
-        return $this->client->request($method, $uri, $options);
+        $headers['Authorization'] = 'Bearer ' . $this->accessToken;
+        $headers['Accept'] = 'application/json';
+
+        return $this->client->createRequest($method, $uri, $headers, $json)->send();
     }
 
     /**
      * @param string $method
      * @param string $uri
-     * @param array $options
+     * @param array $json
      * @return mixed
      */
-    public function json(string $method, string $uri = '', array $options = [])
+    public function json($method, $uri = '', $json = null)
     {
-
-        $response = $this->request($method, $uri, $options);
-        return \GuzzleHttp\json_decode($response->getBody(), true);
+        $response = $this->request($method, $uri, array(), $json === null ? null : json_encode($json));
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -93,8 +91,8 @@ class Api
         $receipt->validate();
         $data = $receipt->toArray();
         $data['deviceId'] = $this->deviceId;
-        return $this->json('POST', 'receipts', [
+        return $this->json('POST', 'receipts', array(
             'json' => $data,
-        ]);
+        ));
     }
 }
