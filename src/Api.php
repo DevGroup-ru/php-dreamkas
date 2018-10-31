@@ -65,6 +65,8 @@ class Api
     {
         $headers['Authorization'] = 'Bearer ' . $this->accessToken;
         $headers['Accept'] = 'application/json';
+        $headers['Content-Type'] = 'application/json';
+        $headers['Content-Length'] = strlen($json);
 
         return $this->client->createRequest($method, $uri, $headers, $json)->send();
     }
@@ -91,8 +93,6 @@ class Api
         $receipt->validate();
         $data = $receipt->toArray();
         $data['deviceId'] = $this->deviceId;
-        return $this->json('POST', 'receipts', array(
-            'json' => $data,
-        ));
+        return $this->json('POST', 'receipts', $data);
     }
 }
