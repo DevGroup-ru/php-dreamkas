@@ -6,20 +6,20 @@
 ## Установка
 
 ```
-composer require devgroup/php-dreamkas
+composer require studservis/php-dreamkas
 ```
 
 ## Пример кода
 
 ```php
 <?php
-use DevGroup\Dreamkas\Api;
-use DevGroup\Dreamkas\CustomerAttributes;
-use DevGroup\Dreamkas\exceptions\ValidationException;
-use DevGroup\Dreamkas\Payment;
-use DevGroup\Dreamkas\Position;
-use DevGroup\Dreamkas\Receipt;
-use DevGroup\Dreamkas\TaxMode;
+use StudServise\Dreamkas\Api;
+use StudServise\Dreamkas\CustomerAttributes;
+use StudServise\Dreamkas\exceptions\ValidationException;
+use StudServise\Dreamkas\Payment;
+use StudServise\Dreamkas\Position;
+use StudServise\Dreamkas\Receipt;
+use StudServise\Dreamkas\TaxMode;
 use GuzzleHttp\Exception\ClientException;
 
 /***

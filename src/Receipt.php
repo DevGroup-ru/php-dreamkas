@@ -1,7 +1,7 @@
 <?php
 
-namespace DevGroup\Dreamkas;
-use DevGroup\Dreamkas\exceptions\ValidationException;
+namespace StudServise\Dreamkas;
+use StudServise\Dreamkas\exceptions\ValidationException;
 
 
 /**

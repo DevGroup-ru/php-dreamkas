@@ -1,5 +1,5 @@
 {
-    "name": "devgroup/php-dreamkas",
+    "name": "studservis/php-dreamkas",
     "description": "Фискализация чека для Дримкас-Ф на php",
     "type": "library",
     "require": {
@@ -12,12 +12,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "DevGroup\\Dreamkas\\": "src/"
+            "StudServise\\Dreamkas\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DevGroup\\Dreamkas\\tests\\": "tests/"
+            "StudServise\\Dreamkas\\tests\\": "tests/"
         }
     },
     "authors": [

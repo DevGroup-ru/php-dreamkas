@@ -1,6 +1,6 @@
 <?php
 
-namespace DevGroup\Dreamkas\exceptions;
+namespace StudServise\Dreamkas\exceptions;
 
 
 /**

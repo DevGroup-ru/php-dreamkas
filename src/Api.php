@@ -1,6 +1,6 @@
 <?php
 
-namespace DevGroup\Dreamkas;
+namespace StudServise\Dreamkas;
 
 use GuzzleHttp\Client;
 
